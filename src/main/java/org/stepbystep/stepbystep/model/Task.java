@@ -3,7 +3,7 @@ package org.stepbystep.stepbystep.model;
 import java.util.List;
 
 public record Task(String id, String name, List<Step> steps) {
-    public Boolean isCompleted(){
+    public boolean isCompleted(){
         return this.steps.stream().allMatch(Step::isCompleted);
     }
 

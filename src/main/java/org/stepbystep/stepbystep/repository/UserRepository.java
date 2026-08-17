@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import org.stepbystep.stepbystep.db.DatabaseConnection;
 import org.stepbystep.stepbystep.model.User;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +22,7 @@ public class UserRepository {
         );
     }
 
-    public List<User> findAll() throws SQLException {
+    public List<User> findAll() throws SQLException, IOException {
         List<User> users = new ArrayList<>();
         try(Connection connection = DatabaseConnection.getConnection();
             PreparedStatement selectAllUsers = connection.prepareStatement("SELECT * FROM users;");

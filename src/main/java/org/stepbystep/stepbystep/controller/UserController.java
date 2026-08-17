@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.stepbystep.stepbystep.model.User;
 import org.stepbystep.stepbystep.service.UserService;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/users")
-    public List<User> getAllUsers() throws SQLException {
+    public List<User> getAllUsers() throws SQLException, IOException {
         return userService.getAllUsers();
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.stepbystep.stepbystep.model.User;
 import org.stepbystep.stepbystep.repository.UserRepository;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
 
-    public List<User> getAllUsers() throws SQLException {
+    public List<User> getAllUsers() throws SQLException, IOException {
         return userRepository.findAll();
     }
 }
