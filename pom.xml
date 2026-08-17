@@ -8,7 +8,7 @@
         <version>4.1.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>org.capsule</groupId>
+    <groupId>org.stepbystep</groupId>
     <artifactId>step-by-step</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>step-by-step</name>

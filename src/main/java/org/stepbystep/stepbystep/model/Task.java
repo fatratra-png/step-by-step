@@ -1,4 +1,4 @@
-package org.capsule.stepbystep.model;
+package org.stepbystep.stepbystep.model;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package org.capsule.stepbystep;
+package org.stepbystep.stepbystep;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
