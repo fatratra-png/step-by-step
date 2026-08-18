@@ -42,6 +42,22 @@ public class TaskRepository {
         return tasks;
     }
 
+    public List<Step> findStepsByTaskId(int taskId, boolean isCompleted) throws Exception {
+        List<Step> steps = new ArrayList<>();
+        try(Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement selectSteps = connection.prepareStatement("SELECT * FROM steps WHERE task_id = ? AND is_completed = ?;")
+        ) {
+            selectSteps.setInt(1, taskId);
+            selectSteps.setBoolean(2, isCompleted);
+            try(ResultSet resultSet = selectSteps.executeQuery()) {
+                while(resultSet.next()) {
+                    steps.add(mapStep(resultSet));
+                }
+            }
+        }
+        return steps;
+    }
+
     private List<Step> findStepsByTaskId(int taskId) throws Exception {
         List<Step> steps = new ArrayList<>();
         try(Connection connection = DatabaseConnection.getConnection();
@@ -55,5 +71,17 @@ public class TaskRepository {
             }
         }
         return steps;
+    }
+
+    public boolean existsByIdAndUserId(int taskId, int userId) throws Exception {
+        try(Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement selectTask = connection.prepareStatement("SELECT 1 FROM tasks WHERE id = ? AND user_id = ?;")
+        ) {
+            selectTask.setInt(1, taskId);
+            selectTask.setInt(2, userId);
+            try(ResultSet resultSet = selectTask.executeQuery()) {
+                return resultSet.next();
+            }
+        }
     }
 }
