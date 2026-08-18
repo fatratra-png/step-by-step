@@ -32,4 +32,8 @@ public class UserService {
         }
         return taskRepository.findStepsByTaskId(taskId, isCompleted);
     }
+
+    public User createUser(String userName) throws Exception {
+        return userRepository.save(userName);
+    }
 }

@@ -4,7 +4,6 @@ import org.springframework.stereotype.Repository;
 import org.stepbystep.stepbystep.db.DatabaseConnection;
 import org.stepbystep.stepbystep.model.User;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,5 +32,17 @@ public class UserRepository {
             }
         }
         return users;
+    }
+
+    public User save(String userName) throws Exception {
+        try(Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement insertUser = connection.prepareStatement("INSERT INTO users(user_name) VALUES (?) RETURNING id;")
+        ) {
+            insertUser.setString(1, userName);
+            try(ResultSet resultSet = insertUser.executeQuery()) {
+                resultSet.next();
+                return new User(resultSet.getString("id"), userName, List.of());
+            }
+        }
     }
 }
