@@ -1,18 +1,20 @@
 package org.stepbystep.stepbystep.db;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.util.List;
 
 public class DatabaseConnection {
-    public static Connection getConnection() throws SQLException, IOException {
-        String[] lines = Files.readAllLines(Path.of(".env")).toArray(new String[0]);
-        String url = lines[0].split("=", 2)[1];
-        String password = lines[1].split("=", 2)[1];
-        String user = lines[2].split("=", 2)[1];
+    public static Connection getConnection() throws Exception {
+        List<String> lines = Files.readAllLines(Path.of(".env"));
+        String url = "", user = "", password = "";
+        for (String line : lines) {
+            if (line.startsWith("DB_URL=")) url = line.substring(7);
+            if (line.startsWith("DB_USER=")) user = line.substring(8);
+            if (line.startsWith("DB_PASSWORD=")) password = line.substring(12);
+        }
         return DriverManager.getConnection(url, user, password);
     }
 }

@@ -22,7 +22,7 @@ public class UserRepository {
         );
     }
 
-    public List<User> findAll() throws SQLException, IOException {
+    public List<User> findAll() throws Exception {
         List<User> users = new ArrayList<>();
         try(Connection connection = DatabaseConnection.getConnection();
             PreparedStatement selectAllUsers = connection.prepareStatement("SELECT * FROM users;");

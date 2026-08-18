@@ -14,7 +14,7 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
 
-    public List<User> getAllUsers() throws SQLException, IOException {
+    public List<User> getAllUsers() throws Exception {
         return userRepository.findAll();
     }
 }
